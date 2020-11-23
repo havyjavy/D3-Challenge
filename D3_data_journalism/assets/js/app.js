@@ -51,6 +51,17 @@ d3.csv("/assets/data/data.csv").then(function (popData) {
         .domain([0, d3.max(popData, d => d.healthcare)])
         .range([svgHeight, 0]);
 
+    // create axes
+    var xAxis = d3.axisBottom(xScale);
+    var yAxis = d3.axisLeft(yScale);
+
+    // append axes
+    chartGroup.append("g")
+        .attr("transform", `translate(0, ${chartHeight})`)
+        .call(xAxis);
+
+    chartGroup.append("g")
+        .call(yAxis);
 
 
     // @TODO
@@ -59,8 +70,8 @@ d3.csv("/assets/data/data.csv").then(function (popData) {
         .data(popData)
         .enter()
         .append("circle")
-        .attr("cx", function (d) { return x(d.poverty); })
-        .attr("cy", function (d) { return y(d.healthcare); })
+        .attr("cx", function (d) { return xScale(d.poverty); })
+        .attr("cy", function (d) { return yScale(d.healthcare); })
         .attr("r", 1.5)
         .style("fill", "69b3a2")
 }).catch(function (error) {
