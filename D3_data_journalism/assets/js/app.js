@@ -1,3 +1,5 @@
+// function makeResponsive() {
+
 // @TODO: YOUR CODE HERE!
 // Define SVG area dimensions
 var svgWidth = 960;
@@ -66,7 +68,7 @@ d3.csv("/assets/data/data.csv").then(function (popData) {
 
     // @TODO
     // Create code to build the scatter plot using the popData.
-    chartGroup.selectAll("dot")
+    chartGroup.selectAll("circle")
         .data(popData)
         .enter()
         .append("circle")
@@ -78,3 +80,10 @@ d3.csv("/assets/data/data.csv").then(function (popData) {
     console.log(error);
 })
 
+
+// }
+// makeResponsive();
+
+// Event listener for window resize.
+// When the browser window is resized, makeResponsive() is called.
+// d3.select(window).on("resize", makeResponsive);
