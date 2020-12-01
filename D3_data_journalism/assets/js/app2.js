@@ -69,17 +69,19 @@ function renderCircles(circlesGroup, newXScale, chosenXaxis) {
 function updateToolTip(chosenXAxis, circlesGroup) {
 
     if (chosenXAxis === "poverty") {
-        var label = "Hair Length:";
+        var label = "Poverty:"
+        var label2 = "Healthcare:";
     }
     else {
-        var label = "# of Albums:";
+        var label = "Income:"
+        var label2 = "Healthcare:";
     }
 
     var toolTip = d3.tip()
         .attr("class", "tooltip")
         .offset([80, -60])
         .html(function (d) {
-            return (`${d.rockband}<br>${label} ${d[chosenXAxis]}`);
+            return (`${label2} ${d.healthcare}<br>${label} ${d[chosenXAxis]}`);
         });
 
     circlesGroup.call(toolTip);
