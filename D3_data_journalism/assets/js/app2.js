@@ -79,9 +79,9 @@ function updateToolTip(chosenXAxis, circlesGroup) {
 
     var toolTip = d3.tip()
         .attr("class", "tooltip")
-        .offset([80, -60])
+        .offset([80, 60])
         .html(function (d) {
-            return (`${label2} ${d.healthcare}<br>${label} ${d[chosenXAxis]}`);
+            return (`${d.abbr}<br> ${label2} ${d.healthcare}<br>${label} ${d[chosenXAxis]}`);
         });
 
     circlesGroup.call(toolTip);
@@ -158,19 +158,19 @@ d3.csv("./assets/data/data.csv").then(function (popData) {
     var labelsGroup = chartGroup.append("g")
         .attr("transform", `translate(${chartWidth / 2}, ${chartHeight + 20})`);
 
-    var hairLengthLabel = labelsGroup.append("text")
+    var hpovertyLabel = labelsGroup.append("text")
         .attr("x", 0)
         .attr("y", 20)
         .attr("value", "poverty") // value to grab for event listener
         .classed("active", true)
-        .text("Poverty %");
+        .text("In Poverty (%)");
 
-    var albumsLabel = labelsGroup.append("text")
+    var incomeLabel = labelsGroup.append("text")
         .attr("x", 0)
         .attr("y", 40)
         .attr("value", "income") // value to grab for event listener
         .classed("inactive", true)
-        .text("Income");
+        .text("Household Income(Median)");
 
     // append y axis
     chartGroup.append("text")
@@ -179,7 +179,7 @@ d3.csv("./assets/data/data.csv").then(function (popData) {
         .attr("x", 0 - (chartHeight / 2))
         .attr("dy", "1em")
         .classed("axis-text", true)
-        .text("Healthcare %");
+        .text("Lacks Healthcare (%)");
 
     // updateToolTip function above csv import
     var circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
@@ -211,18 +211,18 @@ d3.csv("./assets/data/data.csv").then(function (popData) {
 
                 // changes classes to change bold text
                 if (chosenXAxis === "income") {
-                    albumsLabel
+                    incomeLabel
                         .classed("active", true)
                         .classed("inactive", false);
-                    hairLengthLabel
+                    hpovertyLabel
                         .classed("active", false)
                         .classed("inactive", true);
                 }
                 else {
-                    albumsLabel
+                    incomeLabel
                         .classed("active", false)
                         .classed("inactive", true);
-                    hairLengthLabel
+                    hpovertyLabel
                         .classed("active", true)
                         .classed("inactive", false);
                 }
